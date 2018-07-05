@@ -100,9 +100,7 @@ public class Main {
 
         activePort.setBaudRate(115200);
 
-
-
-
+        System.out.println("Reading payload");
 
         InputStream is = classLoader.getResourceAsStream("resources/payload.bin");
         byte[] payload = null;
@@ -112,6 +110,8 @@ public class Main {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+        System.out.println("Entering upgrade mode");
         write(UPGRADE_MODE_ENTER());
 
         try {
@@ -120,6 +120,7 @@ public class Main {
             e.printStackTrace();
         }
 
+        System.out.println("Sending filesize");
         write(UPGRADE_DATA(payload.length));
 
         try {
@@ -128,6 +129,7 @@ public class Main {
             e.printStackTrace();
         }
 
+        System.out.println("Uploading payload");
         ftpClient = new FTPClient();
         try {
             ftpClient.connect("192.168.42.2", 21);
@@ -147,6 +149,7 @@ public class Main {
             e.printStackTrace();
         }
 
+        System.out.println("Executing update");
         write(UPGRADE_FINISH_DATA(payload));
 
 
@@ -155,6 +158,8 @@ public class Main {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+
+        System.out.println("Finished (system may still be processing the update)");
 
         try {
             ftpClient.disconnect();
