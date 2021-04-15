@@ -228,7 +228,7 @@ public class Main {
 
     Upgrade delivery, RC
     Change target from 28 to 2D
-    change upgrade data mode from 02 08 tp 02 04
+    change upgrade data mode from 02 08 to 02 04
 
 */
 
